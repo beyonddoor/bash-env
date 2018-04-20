@@ -1,3 +1,6 @@
+alias ll='ls -l --color'
+alias vim='vi'
+
 # cd
 alias ..='cdl ..'
 alias ...='cdl ../..'
@@ -83,6 +86,14 @@ alias cpuinfo='lscpu'
 # get GPU ram on desktop / laptop## 
 alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
 
-function cdl(){ builtin cd "$*" && ls }
+cdl() { 
+    builtin cd "$*" && ls 
+}
 
-function myfd() { find . -name "$1" }
+myfd() {
+  find . -name "$1" 
+}
+
+dll_ok() {
+  for d in *.dll; do { od -t x2 -N 2 $d | grep 5a4d > /dev/nul; } || { echo $d; od -t x1 -N 16 $d; } done
+}
